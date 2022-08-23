@@ -17,4 +17,4 @@ https://oshwlab.com/kostecki/mailbox-notifier
 * 2x 2P Screw terminal (DB126V-5.0-2P)
 
 **Enclosure**:    
-https://www.printables.com/model/264666
+https://www.printables.com/model/264666-mailbox-notifier-enclosure
