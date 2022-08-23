@@ -1,4 +1,4 @@
-# MailboxNotifier
+# Mailbox Notifier
 A device that sends a message to an MQTT-topic whenever mail is put in my mailbox.
 The detection is done using a reedswitch in the mailbox and a magnet on the flap.
 
