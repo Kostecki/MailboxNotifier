@@ -8,8 +8,10 @@ The detection is done using a reedswitch in the mailbox and a magnet on the flap
 * [MicroWakeupper module](https://github.com/tstoegi/MicroWakeupper)
 * 2x 18650 Lithium batteries
 * TP4056 Battery charging module
+* [DFRobot Reed Switch (SEN0481)](https://wiki.dfrobot.com/Magnetic_Switch_SKU_SEN0481)
 * Glass fuse folder + Fuse
 * Salecom slide switch (TS-13-A1-2-CR1-E-H)
-* 2P Screw terminal (DB126V-5.0-2P)
+* 2x 2P Screw terminal (DB126V-5.0-2P)
 
-Enclosure
+Enclosure:
+https://www.printables.com/model/264666
