@@ -64,6 +64,7 @@ void loop()
   DEBUG_SERIAL.println(batteryVoltage);
 
   // MQTT
+  DEBUG_SERIAL.println("Publishing to MQTT..");
   client.publish(topic, "true");
   if (batteryVoltage <= batteryLowVoltage)
   {
