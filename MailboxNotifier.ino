@@ -7,7 +7,7 @@
 #include "config.h"
 
 // Enable/Disable debug-mode
-#define DEBUG true
+#define DEBUG false
 #define DEBUG_SERIAL \
   if (DEBUG)         \
   Serial
