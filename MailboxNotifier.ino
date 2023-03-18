@@ -49,8 +49,8 @@ void setupWiFi()
 
 void setupConfig()
 {
-  // String url = "http://docker.lan:3006/api/configs/1";
-  DEBUG_SERIAL.println("Requesting " + configURL);
+  DEBUG_SERIAL.println();
+  DEBUG_SERIAL.println("Fetching config from: " + configURL);
   https.addHeader("update-last-seen", "true");
   if (https.begin(espClient, configURL))
   {
@@ -161,6 +161,7 @@ void setupMQTT()
 
     if (client.connect(client_id.c_str(), mqtt_username, mqtt_password))
     {
+      DEBUG_SERIAL.println();
       DEBUG_SERIAL.print("Connected to MQTT topic: ");
       DEBUG_SERIAL.println(mqtt_topic);
     }
@@ -185,15 +186,15 @@ void loop()
 {
   DEBUG_SERIAL.println();
 
-  const float batteryVoltage = microWakeupper.readVBatt();
+  const float battery_voltage = microWakeupper.readVBatt();
 
   DEBUG_SERIAL.print("Current Battery Voltage: ");
-  DEBUG_SERIAL.println(batteryVoltage);
+  DEBUG_SERIAL.println(battery_voltage);
 
   // MQTT
   DEBUG_SERIAL.println("Publishing to MQTT..");
   client.publish(mqtt_topic, "true");
-  if (batteryVoltage <= low_voltage_threshold)
+  if (battery_voltage <= low_voltage_threshold)
   {
     DEBUG_SERIAL.println("Low battery");
     client.publish(mqtt_topic_low_voltage, "true");

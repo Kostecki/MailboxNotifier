@@ -73,6 +73,10 @@
     "regex": "cpp",
     "set": "cpp",
     "stack": "cpp",
-    "functional": "cpp"
+    "functional": "cpp",
+    "filesystem": "cpp",
+    "span": "cpp",
+    "unordered_set": "cpp",
+    "ranges": "cpp"
   }
 }
