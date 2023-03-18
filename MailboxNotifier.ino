@@ -30,7 +30,7 @@ float low_voltage_threshold;
 
 void setupWiFi()
 {
-  WiFi.begin(wifi_ssid, wifi_pass);
+  WiFi.begin(wifi_ssid, wifi_password);
   DEBUG_SERIAL.println();
   DEBUG_SERIAL.println();
   DEBUG_SERIAL.print("Connecting to WiFi: ");
@@ -51,9 +51,10 @@ void setupConfig()
 {
   DEBUG_SERIAL.println();
   DEBUG_SERIAL.println("Fetching config from: " + configURL);
-  https.addHeader("update-last-seen", "true");
+
   if (https.begin(espClient, configURL))
   {
+    https.addHeader("update-last-seen", "true");
     int httpCode = https.GET();
     DEBUG_SERIAL.println("Response code: " + String(httpCode));
     if (httpCode > 0)
@@ -184,15 +185,13 @@ void setup()
 
 void loop()
 {
-  DEBUG_SERIAL.println();
-
   const float battery_voltage = microWakeupper.readVBatt();
 
   DEBUG_SERIAL.print("Current Battery Voltage: ");
   DEBUG_SERIAL.println(battery_voltage);
 
   // MQTT
-  DEBUG_SERIAL.println("Publishing to MQTT..");
+  DEBUG_SERIAL.println("Publishing to MQTT");
   client.publish(mqtt_topic, "true");
   if (battery_voltage <= low_voltage_threshold)
   {
