@@ -18,6 +18,7 @@ PubSubClient client(espClient);
 MicroWakeupper microWakeupper;
 
 DynamicJsonDocument doc(4096);
+StaticJsonDocument<32> voltageDoc;
 
 // Configs
 const char *mqtt_broker;
@@ -204,6 +205,25 @@ void loop()
   }
   client.disconnect();
   espClient.flush();
+
+  // Update Voltage
+  DEBUG_SERIAL.println("Updating project deviceVoltage");
+  voltageDoc["id"] = projectId;
+  voltageDoc["deviceVoltage"] = battery_voltage;
+  String payload;
+  serializeJson(voltageDoc, payload);
+
+  if (https.begin(espClient, updateURL))
+  {
+    https.addHeader("Content-Type", "application/json");
+    int httpCode = https.PUT(payload);
+    DEBUG_SERIAL.println("Response code: " + String(httpCode));
+    https.end();
+  }
+  else
+  {
+    DEBUG_SERIAL.printf("[HTTP] Unable to connect\n");
+  }
 
   microWakeupper.reenable();
 
