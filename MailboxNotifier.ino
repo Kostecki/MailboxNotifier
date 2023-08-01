@@ -19,6 +19,7 @@ MicroWakeupper microWakeupper;
 
 DynamicJsonDocument doc(4096);
 StaticJsonDocument<32> voltageDoc;
+StaticJsonDocument<64> notificationDoc;
 
 // Configs
 const char *mqtt_broker;
@@ -198,6 +199,21 @@ void loop()
   {
     DEBUG_SERIAL.println("Low battery");
     client.publish(mqtt_topic_low_voltage, "true");
+
+    DEBUG_SERIAL.println("Sending ntfy notification");
+    if (https.begin(espClient, ntfyURL))
+    {
+      https.addHeader("Authorization", ntfyAuth);
+      https.addHeader("Tags", "battery");
+      https.addHeader("Title", "Postkasse: Lavt batteriniveau");
+      int httpCode = https.POST(String(battery_voltage) + " Volt. Tid til at oplade!");
+      DEBUG_SERIAL.println("Response code: " + String(httpCode));
+      https.end();
+    }
+    else
+    {
+      DEBUG_SERIAL.printf("[HTTP] Unable to connect\n");
+    }
   }
   else
   {
