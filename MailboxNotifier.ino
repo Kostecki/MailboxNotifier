@@ -224,12 +224,12 @@ void loop()
 
   // Update Voltage
   DEBUG_SERIAL.println("Updating project deviceVoltage");
-  voltageDoc["id"] = projectId;
-  voltageDoc["deviceVoltage"] = battery_voltage;
+  voltageDoc["projectId"] = projectId;
+  voltageDoc["reading"] = battery_voltage;
   String payload;
   serializeJson(voltageDoc, payload);
 
-  if (https.begin(espClient, updateURL))
+  if (https.begin(espClient, voltageUpdateURL))
   {
     https.addHeader("Content-Type", "application/json");
     int httpCode = https.PUT(payload);
