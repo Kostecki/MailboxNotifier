@@ -1,15 +1,14 @@
 // WiFi
-const char *wifi_ssid = "";
-const char *wifi_pass = "";
+const char *wifi_ssid;
+const char *wifi_pass;
 
-// MQTT Config
-const char *mqtt_broker = "";
-const char *mqtt_username = "";
-const char *mqtt_password = "";
-const int mqtt_port = 1883;
+// Project
+const int projectId;
 
-// MQTT Topics
-const char *topic = "";
-const char *lowVoltageTopic = "";
+// Config URL
+const String configURL;
+const String voltageUpdateURL;
 
-const float batteryLowVoltage = 3.0;
+// Ntfy
+const String ntfyURL;
+const String ntfyAuth;
