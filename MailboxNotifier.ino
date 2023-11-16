@@ -73,76 +73,57 @@ void setupConfig()
 
       for (JsonObject elem : doc.as<JsonArray>())
       {
-        const int id = elem["id"];
+        const char *key = elem["key"];
         const bool enabled = elem["enabled"];
 
-        switch (id)
-        {
-        case 8:
-        {
-          if (enabled)
-          {
-            mqtt_port = elem["value"];
-          }
-          break;
-        }
-
-        case 9:
-        {
-          if (enabled)
-          {
-            mqtt_username = elem["value"];
-          }
-          break;
-        }
-
-        case 10:
-        {
-          if (enabled)
-          {
-            mqtt_password = elem["value"];
-          }
-          break;
-        }
-
-        case 11:
-        {
-          if (enabled)
-          {
-            mqtt_topic = elem["value"];
-          }
-          break;
-        }
-
-        case 12:
-        {
-          if (enabled)
-          {
-            mqtt_topic_low_voltage = elem["value"];
-          }
-          break;
-        }
-
-        case 13:
-        {
-          if (enabled)
-          {
-            low_voltage_threshold = elem["value"];
-          }
-          break;
-        }
-
-        case 14:
+        if (strcmp(key, "mqtt-broker") == 0)
         {
           if (enabled)
           {
             mqtt_broker = elem["value"];
           }
-          break;
         }
-
-        default:
-          break;
+        else if (strcmp(key, "mqtt-port") == 0)
+        {
+          if (enabled)
+          {
+            mqtt_port = elem["value"];
+          }
+        }
+        else if (strcmp(key, "mqtt-username") == 0)
+        {
+          if (enabled)
+          {
+            mqtt_username = elem["value"];
+          }
+        }
+        else if (strcmp(key, "mqtt-password") == 0)
+        {
+          if (enabled)
+          {
+            mqtt_password = elem["value"];
+          }
+        }
+        else if (strcmp(key, "mqtt-topic") == 0)
+        {
+          if (enabled)
+          {
+            mqtt_topic = elem["value"];
+          }
+        }
+        else if (strcmp(key, "low-voltage-topic") == 0)
+        {
+          if (enabled)
+          {
+            mqtt_topic_low_voltage = elem["value"];
+          }
+        }
+        else if (strcmp(key, "low-voltage-threshold") == 0)
+        {
+          if (enabled)
+          {
+            low_voltage_threshold = elem["value"];
+          }
         }
       }
     }
